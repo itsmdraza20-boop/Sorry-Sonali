@@ -1,0 +1,208 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sorry Sonali ❤️🥺</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  font-family: system-ui,-apple-system,"Segoe UI","Segoe UI Emoji",
+  "Apple Color Emoji","Noto Color Emoji",sans-serif;
+}
+
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+  overflow:hidden;
+}
+
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:22px;
+  text-align:center;
+  width:90%;
+  max-width:360px;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.top-pic{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid #ff4d6d;
+}
+
+#msg{
+  font-size:15px;
+  margin-top:12px;
+  min-height:60px;
+}
+
+.buttons{
+  margin-top:22px;
+  position:relative;
+  height:130px;
+}
+
+button{
+  border:none;
+  padding:14px 26px;
+  font-size:16px;
+  border-radius:30px;
+  cursor:pointer;
+  transition:all .3s ease;
+}
+
+#forgive{
+  background:#ff4d6d;
+  color:white;
+  font-weight:bold;
+}
+
+#ignore{
+  background:#444;
+  color:white;
+  position:absolute;
+  right:0;
+  top:0;
+}
+
+.angry{
+  position:absolute;
+  font-size:32px;
+  animation:fly 1.2s linear forwards;
+}
+
+@keyframes fly{
+  from{opacity:1;transform:translateY(0);}
+  to{opacity:0;transform:translateY(-120px);}
+}
+
+.slideshow{
+  display:flex;
+  justify-content:center;
+  margin-top:18px;
+}
+
+.slideshow img{
+  width:170px;
+  height:170px;
+  border-radius:22px;
+  object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <img class="top-pic" src="https://i.ibb.co/rRLsKYRM/front.jpg">
+
+  <h2>Sonali 🥺❤️</h2>
+
+  <div id="msg">
+    Thoda drama ho gaya 😅<br>
+    Par dil se sorry hoon 🙏
+  </div>
+
+  <div class="buttons">
+    <button id="forgive">Forgive ❤️</button>
+    <button id="ignore">Ignore 😈</button>
+  </div>
+</div>
+
+<!-- 🎵 BACKGROUND MUSIC (LOCAL FILE) -->
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="pop" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+<audio id="yay" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+
+<script>
+const bgMusic=document.getElementById("bgMusic");
+bgMusic.volume=0.35;
+
+// Mobile autoplay fix
+document.addEventListener("click",()=>{
+  bgMusic.play().catch(()=>{});
+},{once:true});
+
+let ignoreCount=0;
+const ignoreBtn=document.getElementById("ignore");
+const forgiveBtn=document.getElementById("forgive");
+const msg=document.getElementById("msg");
+const pop=document.getElementById("pop");
+const yay=document.getElementById("yay");
+
+const lines=[
+  "Arre Sonali 😭 ek baar maaf kar do na",
+  "Itna gussa sehat ke liye accha nahi 😜",
+  "Ignore dabana jurm banta ja raha hai 😂",
+  "Dil se sorry hoon yaar 🥺",
+  "Bas bas… ab maan jao ❤️",
+  "Aeeeeee 😤 maaf bhi kar sakti ho!"
+];
+
+ignoreBtn.onclick=()=>{
+  pop.play();
+  ignoreCount++;
+
+  msg.innerHTML = lines[ignoreCount % lines.length];
+
+  const x=Math.random()*200-100;
+  const y=Math.random()*80-40;
+  const scale=Math.max(0.35,1-ignoreCount*0.12);
+  ignoreBtn.style.transform=`translate(${x}px,${y}px) scale(${scale})`;
+
+  forgiveBtn.style.transform=`scale(${1+ignoreCount*0.15})`;
+
+  const emojis=["😡","😠","😤","🔥"];
+  for(let i=0;i<3;i++){
+    const e=document.createElement("div");
+    e.className="angry";
+    e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left=Math.random()*innerWidth+"px";
+    e.style.top=Math.random()*innerHeight+"px";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),1200);
+  }
+};
+
+forgiveBtn.onclick=()=>{
+  yay.play();
+  bgMusic.play();
+
+  document.body.innerHTML=`
+    <div style="
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      background:#ffdde1;
+      text-align:center;
+      padding:20px;">
+      <h1>YAYYYYY 🥹❤️</h1>
+      <p>
+        Thank you ❤️ Thank you ❤️ Thank you ❤️ Thank you ❤️<br>
+        Gussa officially cancel ❌<br>
+        Ab only Dosti no Ladaayi Ok 😊
+      </p>
+
+      <div class="slideshow">
+        <img src="https://i.ibb.co/bgKYZKDD/last.jpg">
+      </div>
+    </div>`;
+};
+</script>
+
+</body>
+</html>
